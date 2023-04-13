@@ -1,0 +1,17 @@
+*~
+__pycache__
+*.aux
+*.log
+*.out
+*.pyc
+*.sqlite
+*.sqlite3
+.ipynb_checkpoints/
+.DS_Store
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+auth.py
+auth.R
+Thumbs.db
