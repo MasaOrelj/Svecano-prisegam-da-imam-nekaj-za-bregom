@@ -1,14 +1,14 @@
 import pandas as pd
+import re
 
 podatki_characters = pd.read_csv(r'podatki/Characters.csv', sep=";")
 df = pd.DataFrame(podatki_characters)
 
-students = df.loc[df['Job'] == "Student"]
-professors = df.loc[df['Job'] == r'.*Professor.*']
+professors = df[df['Job'].str.match('(.*(Professor).*)|(Headmaster)|(Defence Against the Dark Arts(1991-1992))|(Defence Against the Dark Arts(1992-1993))|(Headmistress of Beauxbatons Academy of Magic)|(Caretaker of Hogwarts)|(Matron at Hogwarts School)|(Flying Instructor at Hogwarts)|(Librarian at Hogwarts)|(Astronomer at Hogwarts)')== True]
+students1 = df[df['Job'].str.match('(.*(Professor).*)|(Headmaster)|(Defence Against the Dark Arts(1991-1992))|(Defence Against the Dark Arts(1992-1993))|(Headmistress of Beauxbatons Academy of Magic)|(Caretaker of Hogwarts)|(Matron at Hogwarts School)|(Flying Instructor at Hogwarts)|(Librarian at Hogwarts)|(Astronomer at Hogwarts)')== False]
+students2 = df[df['Job'].isna()]
+students_and_muggles = pd.concat([students1, students2], axis=0)
+muggles = df[df['Name'].str.match('.*(Dursley)')== True]
+students = students_and_muggles[(students_and_muggles["Id"] != 120) & (students_and_muggles["Id"] != 121) & (students_and_muggles["Id"] != 122) & (students_and_muggles["Id"] != 123)]
 
-#for i in range(len(df)):
-#    if df["Job"] == "Student":df.loc[df['Job'] == "Student"]
-#        students = df
-        #df['Job'] = df['Job'].replace(['Headmaster', 'Keeper of Keys and Grounds | Professor'], 'Professor')
-print(students)
-print(professors)
+
