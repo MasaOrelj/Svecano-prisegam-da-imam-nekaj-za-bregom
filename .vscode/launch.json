@@ -1,7 +1,16 @@
 {
+<<<<<<< HEAD
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+=======
 
     "version": "0.2.0",
     "configurations": [
+>>>>>>> 7e56db0bc3881f23c2393292994a6976bed8a197
         {
             "name": "Python: Current File",
             "type": "python",
