@@ -34,5 +34,3 @@ def uvozi_v_sql(df, ime):
 uvozi_v_sql(professors2, "professors")
 
 
-
-
