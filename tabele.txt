@@ -1,0 +1,78 @@
+-- Active: 1682968530399@@baza.fmf.uni-lj.si@5432@sem2023_masao@public
+GRANT ALL ON DATABASE sem2023_masao TO pavlan WITH GRANT OPTION;
+GRANT ALL ON SCHEMA public TO pavlan WITH GRANT OPTION;
+GRANT ALL ON DATABASE sem2023_masao TO ianl WITH GRANT OPTION;
+GRANT ALL ON SCHEMA public TO ianl WITH GRANT OPTION;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO gasperdr WITH GRANT OPTION;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO ianl WITH GRANT OPTION;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO gasperdr WITH GRANT OPTION;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO ianl WITH GRANT OPTION;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO pavlan WITH GRANT OPTION;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO pavlan WITH GRANT OPTION;
+
+
+CREATE TABLE house(
+    "id" SERIAL PRIMARY KEY,
+    "name" CHAR NOT NULL
+);
+
+
+CREATE TABLE student(
+    "id" SERIAL PRIMARY KEY,
+    "name" CHAR NOT NULL,
+    "username" CHAR NOT NULL UNIQUE,
+    "password" CHAR NOT NULL,
+    "patronus" CHAR,
+    "house_id" INT REFERENCES house("id")
+);
+
+CREATE TABLE profesor(
+    "id" SERIAL PRIMARY KEY,
+    "name" CHAR NOT NULL,
+    "house" CHAR
+);
+
+CREATE TABLE subject(
+    "id" SERIAL PRIMARY KEY,
+    "name" CHAR NOT NULL,
+    "profesor_id" INT REFERENCES profesor("id") NOT NULL
+);
+
+CREATE TABLE student_subject(
+    "id" SERIAL PRIMARY KEY,
+    "student_id" INT REFERENCES student("id"),
+    "subject_id" INT REFERENCES subject("id")
+);
+
+CREATE TABLE comment(
+    "id" SERIAL PRIMARY KEY,
+    "text" TEXT,
+    "student_id" INT REFERENCES student("id"),
+    "post_id" INT REFERENCES post("id")
+);
+
+CREATE TABLE post(
+    "id" SERIAL PRIMARY KEY,
+    "text" TEXT,
+    "likes" INT,
+    "student_id" INT REFERENCES student("id"),
+    "forum_id" INT REFERENCES forum("id")
+);
+
+CREATE TABLE student_post(
+    "id" SERIAL PRIMARY KEY,
+    "student_id" INT REFERENCES student("id"),
+    "post_id" INT REFERENCES post("id")
+);
+
+CREATE TABLE forum(
+    "id" SERIAL PRIMARY KEY,
+    "name" CHAR NOT NULL
+);
+
+CREATE TABLE student_forum(
+    "id" SERIAL PRIMARY KEY,
+    "student_id" INT REFERENCES student("id"),
+    "forum_id" INT REFERENCES forum("id")
+);
+
