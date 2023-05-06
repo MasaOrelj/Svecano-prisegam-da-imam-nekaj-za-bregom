@@ -18,6 +18,17 @@ class Student:
     house_id: int = field(default=0)
 
 
+
+@dataclass
+class StudentDTO:
+    id: int = field(default=0)
+    name: str = field(default="")
+    username: str = field(default="")
+    password: str = field(default="")
+    patronus: str = field(default="")
+    house_name: str = field(default="")
+
+
 @dataclass
 class Professor:
     id: int = field(default=0)
@@ -32,12 +43,31 @@ class Subject:
     professor_id: int = field(default=0)
 
 
+
+@dataclass
+class SubjectDTO:
+    id: int = field(default=0)
+    name: str = field(default="")
+    professor_id: int = field(default=0)
+    professor_name: str = field(default="")
+
+
 @dataclass
 class Comment:
     id: int = field(default=0)
     text: str = field(default="")
     student_id: int = field(default=0)
     post_id: int = field(default=0)
+
+
+
+@dataclass
+class CommentDTO:
+    id: int = field(default=0)
+    text: str = field(default="")
+    student_name: str = field(default="")
+    post_id: int = field(default=0)
+    post_text: str = field(default="")
 
 
 @dataclass
@@ -47,6 +77,19 @@ class Post:
     likes: int =  field(default=0)
     student_id: int = field(default=0)
     forum_id: int = field(default=0)
+
+
+
+
+@dataclass
+class PostDTO:
+    id: int = field(default=0)
+    text: str = field(default="")
+    likes: int =  field(default=0)
+    student_id: int = field(default=0)
+    student_name: str = field(default="")
+    forum_id: int = field(default=0)
+    forum_name: str = field(default="")
 
 
 @dataclass
