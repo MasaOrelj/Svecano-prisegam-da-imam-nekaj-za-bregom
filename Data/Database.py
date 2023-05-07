@@ -5,7 +5,7 @@ from typing import List, TypeVar, Type, Callable
 from Modeli import*
 from pandas import DataFrame
 from re import sub
-import auth_public as auth
+import auth as auth
 from datetime import date
 import warnings
 
