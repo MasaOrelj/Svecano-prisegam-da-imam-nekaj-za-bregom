@@ -31,4 +31,4 @@ def uvozi_v_sql(df, ime):
     repo.df_to_sql_create(df, ime, add_serial=True, use_camel_case=True)
     repo.df_to_sql_insert(df, ime, use_camel_case=True)
 
-uvozi_v_sql(professors2, "professors")
+uvozi_v_sql(professors2, "professor")

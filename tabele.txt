@@ -12,28 +12,28 @@ GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO pavlan WITH GRANT OPTION;
 
 CREATE TABLE house(
     "id" SERIAL PRIMARY KEY,
-    "name" CHAR NOT NULL
+    "name" TEXT NOT NULL
 );
 
 
 CREATE TABLE student(
     "id" SERIAL PRIMARY KEY,
-    "name" CHAR NOT NULL,
-    "username" CHAR NOT NULL UNIQUE,
-    "password" CHAR NOT NULL,
-    "patronus" CHAR,
+    "name" TEXT NOT NULL,
+    "username" TEXT NOT NULL UNIQUE,
+    "password" TEXT NOT NULL,
+    "patronus" TEXT,
     "house_id" INT REFERENCES house("id")
 );
 
-CREATE TABLE professor(
-    "id" SERIAL PRIMARY KEY,
-    "name" CHAR NOT NULL,
-    "house" CHAR
-);
+#CREATE TABLE professor(
+#    "id" SERIAL PRIMARY KEY,
+#    "name" TEXT NOT NULL,
+#    "house" TEXT
+#);
 
 CREATE TABLE subject(
     "id" SERIAL PRIMARY KEY,
-    "name" CHAR NOT NULL,
+    "name" TEXT NOT NULL,
     "professor_id" INT REFERENCES professor("id") NOT NULL
 );
 
@@ -43,12 +43,13 @@ CREATE TABLE student_subject(
     "subject_id" INT REFERENCES subject("id")
 );
 
-CREATE TABLE comment(
+
+
+CREATE TABLE forum(
     "id" SERIAL PRIMARY KEY,
-    "text" TEXT,
-    "student_id" INT REFERENCES student("id"),
-    "post_id" INT REFERENCES post("id")
+    "name" TEXT NOT NULL
 );
+
 
 CREATE TABLE post(
     "id" SERIAL PRIMARY KEY,
@@ -64,10 +65,14 @@ CREATE TABLE student_post(
     "post_id" INT REFERENCES post("id")
 );
 
-CREATE TABLE forum(
+
+CREATE TABLE comment(
     "id" SERIAL PRIMARY KEY,
-    "name" CHAR NOT NULL
+    "text" TEXT,
+    "student_id" INT REFERENCES student("id"),
+    "post_id" INT REFERENCES post("id")
 );
+
 
 CREATE TABLE student_forum(
     "id" SERIAL PRIMARY KEY,
