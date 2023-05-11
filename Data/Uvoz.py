@@ -22,6 +22,10 @@ students2 = df[df['Job'].isna()]
 students_and_muggles = pd.concat([students1, students2], axis=0)
 muggles = df[df['Name'].str.match('.*(Dursley)')== True]
 students = students_and_muggles[(students_and_muggles["Id"] != 120) & (students_and_muggles["Id"] != 121) & (students_and_muggles["Id"] != 122) & (students_and_muggles["Id"] != 123)]
+students.drop(columns=["Id", "Gender", "Job", "Wand", "Species", "Blood status", "Hair colour", "Eye colour", "Loyalty", "Skills", "Birth", "Death"], inplace=True)
+students['username'] = ""
+students['password'] = ""
+students.columns= ['name', 'house', 'patronus', 'username', 'password']
 
 
 
@@ -32,3 +36,4 @@ def uvozi_v_sql(df, ime):
     repo.df_to_sql_insert(df, ime, use_camel_case=True)
 
 uvozi_v_sql(professors2, "professor")
+uvozi_v_sql(students,"student")
