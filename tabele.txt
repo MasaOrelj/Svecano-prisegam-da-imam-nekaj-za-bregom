@@ -90,3 +90,15 @@ INSERT INTO house ("id","name")
 VALUES (3,'Ravenclaw');
 INSERT INTO house ("id","name")
 VALUES (4,'Slytherin');
+
+
+update student 
+set "House" = (select id from house where student."House"= house.name);
+
+alter table student alter column "House" TYPE integer using ("House"::integer);
+
+alter table student rename column "House" to "House_id";
+
+alter table student add foreign key ("House_id") REFERENCES house(id);
+
+
