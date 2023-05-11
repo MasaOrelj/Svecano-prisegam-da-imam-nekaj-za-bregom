@@ -102,3 +102,11 @@ alter table student rename column "House" to "House_id";
 alter table student add foreign key ("House_id") REFERENCES house(id);
 
 
+insert into forum(name) values('The Daily Prophet');
+insert into forum(name) values('The Slytherin Dungeon');
+insert into forum(name) values('The Ravenclaw Tower');
+insert into forum(name) values('The Gryffindor Common Room');
+insert into forum(name) values('The Hufflepuff Lounge');
+insert into forum(name) values('The Quidditch Pitch');
+insert into forum(name) values('The Hogwarts School of Witchcraft and Wizardry');
+insert into forum(name) values('The Room of Requirement');
