@@ -1,2 +1,5 @@
 psycopg2-binary
 pandas
+bottle
+dataclasses-json
+bcrypt
