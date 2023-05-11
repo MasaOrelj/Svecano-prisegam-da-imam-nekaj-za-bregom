@@ -121,3 +121,11 @@ insert into forum(name) values('The Hogwarts meme page');
 
 INSERT INTO subject(name, professor_id)
 VALUES ('Astronomy', 20), ('Charms', 5), ('Defence Against the Dark Arts', 8), ('Herbology',16), ('History of magic',10), ('Potions',7), ('Transfiguration',4), ('Arithmancy',21), ('Care of magicial creatures',2), ('Tarot',13), ('The Dark Lord Ideology', 14), ('Study of Ancient Runes', 11), ('Alchemy',9), ('Apparition', 3), ('Occlumency and Legilimency', 1), ('Divination', 6), ('Muggle Studies', 12), ('Use of Unforgivable Curses',15), ('The Practice of Dark Rituals',17), ('Flying Instructor',18), ('Library Science',19);
+
+
+update professor 
+set "House" = (select id from house where professor."House"= house.name);
+
+alter table professor alter column "House" TYPE integer using ("House"::integer);
+
+alter table professor rename column "House" to "House_id";

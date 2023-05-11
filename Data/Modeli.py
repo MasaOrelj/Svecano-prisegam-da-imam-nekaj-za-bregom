@@ -33,7 +33,7 @@ class StudentDTO:
 class Professor:
     id: int = field(default=0)
     name: str = field(default="")
-    house: str = field(default="")
+    house_id: str = field(default="")
 
 
 @dataclass
