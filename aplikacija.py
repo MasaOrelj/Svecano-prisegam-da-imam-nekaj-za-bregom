@@ -44,7 +44,7 @@ def index():
     Domača stran je stran z cenami izdelkov.
     """
         
-    return template_user('osnovna_stran.html')
+    return template_user('profil.html')
  
     
 
