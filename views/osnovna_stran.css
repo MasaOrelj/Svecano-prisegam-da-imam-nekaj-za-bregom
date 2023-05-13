@@ -1,4 +1,25 @@
+body {
+  padding: 50px;
+}
+
+.container {
+  border: 3px solid blue;
+  padding: 20px 40px 40px;
+  max-width: 600px;
+}
+.container__image {
+  width: 250px;
+  margin: 30px 30px 30px 0;
+  float: left;
+}
+.container__text {
+  display: inline;
+}
 #hp  {
-  float: left;    
-   padding: 15px 15px 15px 15px;
+  float: right;    
+   margin: 0 0 0 15px;
+  }
+.center {
+  margin-left: auto;
+  margin-right: auto;
   }
