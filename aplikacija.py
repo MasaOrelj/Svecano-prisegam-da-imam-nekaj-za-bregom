@@ -5,6 +5,17 @@
 from bottleext import get, post, run, request, template, redirect, static_file, url, response, template_user, debug
 
 
+from Data.Database import Repo
+from Data.Modeli import *
+from Data.Services import AuthService
+from functools import wraps
+
+import os
+
+repo = Repo()
+auth = AuthService(repo)
+
+
 # uvozimo ustrezne podatke za povezavo
 
 
@@ -39,6 +50,7 @@ def index():
 
 debug(True)
 
+ 
 # poženemo strežnik na podanih vratih, npr. http://localhost:8080/
 if __name__ == "__main__":
     run(host='localhost', port=SERVER_PORT, reloader=RELOADER)
