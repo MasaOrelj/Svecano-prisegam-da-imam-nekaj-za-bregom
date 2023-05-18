@@ -91,6 +91,15 @@ def houses_get():
 def houses_get():
     bottle.redirect('/')   
 
+@bottle.get('/forum/')
+def houses_get():
+    return bottle.template("forum.html") 
+
+@bottle.post('/forum/')
+def houses_get():
+    bottle.redirect('/')
+    
+
 debug(True)
 
  
