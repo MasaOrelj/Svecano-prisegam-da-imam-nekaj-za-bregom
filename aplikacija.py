@@ -67,11 +67,11 @@ def osnovna_stran():
     return bottle.template('osnovna_stran.html')
 
 @bottle.get('/profile/')
-def houses_get():
+def profile_get():
     return bottle.template("profile.html") 
 
 @bottle.post('/profile/')
-def houses_get():
+def profile_post():
     bottle.redirect('/') 
  
 @bottle.get('/house/')
@@ -79,24 +79,24 @@ def houses_get():
     return bottle.template("house.html") 
 
 @bottle.post('/house/')
-def houses_get():
+def houses_post():
     bottle.redirect('/')   
 
 
 @bottle.get('/subjects/')
-def houses_get():
-    return bottle.template("house.html") 
+def subjects_get():
+    return bottle.template("subjects.html") 
 
 @bottle.post('/subjects/')
-def houses_get():
+def subjects_post():
     bottle.redirect('/')   
 
 @bottle.get('/forum/')
-def houses_get():
+def forum_get():
     return bottle.template("forum.html") 
 
 @bottle.post('/forum/')
-def houses_get():
+def forum_post():
     bottle.redirect('/')
 
 @get('/prijava/') 
