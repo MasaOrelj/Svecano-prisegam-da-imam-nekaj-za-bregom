@@ -98,7 +98,34 @@ def houses_get():
 @bottle.post('/forum/')
 def houses_get():
     bottle.redirect('/')
-    
+
+@get('/prijava/') 
+def prijava_get():
+    return template("prijava.html")
+
+@post('/prijava/') 
+def prijava_post():
+    uporabnisko_ime = request.forms.get('uporabnisko_ime')
+    geslo = request.forms.get('geslo')
+    if uporabnisko_ime is None or geslo is None:
+        redirect(url('prijava_get'))
+    hashBaza = None
+    try: 
+        cur.execute("SELECT geslo FROM student WHERE username = %s", [uporabnisko_ime])
+        hashBaza = cur.fetchall()[0][0]
+        cur.execute("SELECT id FROM uporabnik WHERE username = %s", [uporabnisko_ime])
+        id_gosta = cur.fetchall()[0][0]
+    except:
+        hashBaza = None
+    if hashBaza is None:
+        redirect(url('prijava_get'))
+        return
+    if geslo != hashBaza:
+         #nastaviSporocilo('Nekaj je šlo narobe.') 
+         redirect(url('prijava_get'))
+         return
+#    redirect(url('pregled_rezervacij_gosta'))
+    redirect(url('osnovna_stran', id_gosta=id_gosta))
 
 debug(True)
 
