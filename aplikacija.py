@@ -24,7 +24,7 @@ DB_PORT = os.environ.get('POSTGRES_PORT', 5432)
 
 @get('/')
 def osnovna_stran():
-    return bottle.template('osnovna_stran.html')
+    return template('osnovna_stran.html')
 
 @get('/profile')
 def profile_get():
