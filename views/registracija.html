@@ -1,29 +1,24 @@
-% rebase('osnova.html')
-<form method="POST">
-    <div class="field">
-        <label class="label">Uporabniško ime</label>
-        <div class="control has-icons-left">
-            <input class="input" name="uporabnisko_ime" type="text" placeholder="uporabniško ime">
-            <span class="icon is-small is-left">
-                <i class="fas fa-user"></i>
-            </span>
-        </div>
-        % if napaka:
-        <p class="help is-danger">{{ napaka }}</p>
-        % end
+<form action="{{url('registracija_post')}}" method="post" class="row-g3 mx-2">
+    <div class="col-4">
+        <label for="name" class="form-label my-3">Name:</label>
+        <input id="name" name="name" type="text" class="form-control" />
     </div>
-    <div class="field">
-        <label class="label">Geslo</label>
-        <div class="control has-icons-left">
-            <input class="input" name="geslo" type="password" placeholder="geslo">
-            <span class="icon is-small is-left">
-                <i class="fas fa-lock"></i>
-            </span>
-        </div>
+    <div class="col-4">
+        <label for="username" class="form-label my-3">Username:</label>
+        <input id="username" name="username" type="text" class="form-control" />
     </div>
-    <div class="field is-grouped">
-        <div class="control">
-            <button class="button is-light">Registriraj se</button>
-        </div>
+    <div class="col-4">
+        <label for="password" class="form-label my-3">password:</label>
+        <input id="password" name="password " type="password" class="form-control" />
     </div>
-</form>
+    <div class="col-4">
+        <label for="patronus" class="form-label my-3">Patronus:</label>
+        <input id="patronus" name="patronus" type="text" class="form-control" />
+    </div>
+    <div class="col-4">
+        <label for="house_id" class="form-label my-3">House_id:</label>
+        <input id="house_id" name="house_id" type="date" class="form-control" />
+    </div>
+    <div class="col-12 my-3 d-flex justify-content-start">
+        <button class="btn btn-outline-dark" type="submit">Potrdi</button>
+    </div>

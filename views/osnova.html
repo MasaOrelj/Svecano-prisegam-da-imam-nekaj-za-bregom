@@ -26,27 +26,6 @@
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
-</nav>
-
-<div class="navbar-end">
-    <div class="navbar-item">
-      <div class="buttons">
-        % if defined('uporabnik'):
-          <form method="POST" action="/odjava">
-            <button class="button is-light">
-              Odjavi se
-            </button>
-          </form>
-          <strong style="margin-left: 10px;">{{ "proba" }}</strong>
-        % else:
-          <a style="border-color: rgb(44, 180, 153)"  class="button is-primary" href="/registracija/">
-            <strong>Registriraj se</strong>
-          </a>
-          <a class="button is-light" href="/prijava/">
-            Prijavi se
-          </a>
-        % end
-      </div>
-    </div>       
+</nav> 
 </body>
 </html>
