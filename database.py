@@ -34,7 +34,7 @@ class Repo:
         # ali je že v tabeli?
         self.cur.execute("""
             SELECT * from student
-            WHERE Username = %s
+            WHERE "Username" = %s
             """, (Student.username,))
         row = self.cur.fetchone()
         if row:
@@ -42,7 +42,7 @@ class Repo:
             return Student
         #nov uporabnik
         self.cur.execute("""
-            INSERT INTO student (Name, Username, Password, Patronus, House_id)
+            INSERT INTO student ("Name", "Username", "Password", "Patronus", "House_id")
              VALUES (%s, %s, %s, %s, %s); """, (Student.name, Student.username, Student.password, Student.patronus, Student.house_id))
         self.conn.commit()
         return Student
