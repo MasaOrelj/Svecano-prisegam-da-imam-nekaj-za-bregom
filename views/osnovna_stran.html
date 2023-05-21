@@ -47,14 +47,14 @@
         </button>
     </div>
 </nav>   
-
+<div class="form-center">
 <form action="{{url('prijava_get')}}" method="post" autocomplete="off">
     <div class="form-group">
       <div class="form-group col-md-6">
         <label for="uporabnisko_ime">Username:</label>
         <input id="uporabnisko_ime" name="uporabnisko_ime" type="text" class="form-control" required
           oninput="this.setCustomValidity('')"
-          oninvalid="this.setCustomValidity('Obvezno polje')"
+          oninvalid="this.setCustomValidity('Required field')"
           />
       </div>
     </div>
@@ -63,7 +63,7 @@
         <label for="geslo">Password:</label>
         <input id="geslo" name="geslo" type="password" class="form-control" required
           oninput="this.setCustomValidity('')"
-          oninvalid="this.setCustomValidity('Obvezno polje')"
+          oninvalid="this.setCustomValidity('Required field')"
           />
       </div>
     </div>
@@ -71,6 +71,7 @@
       <button class="btn btn-primary" type="submit">Log in</button>    
     </div>
 </form>
+</div>
 
 
 <form action="{{url('registracija_get')}}" method="GET">

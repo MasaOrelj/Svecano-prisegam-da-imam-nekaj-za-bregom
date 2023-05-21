@@ -33,7 +33,7 @@ def cookie_required(f):
         cookie = request.get_cookie("username")
         if cookie:
             return f(*args, **kwargs)
-        return template('subjects.html')
+        #return template('profile.html')%Popravi dekorator
     return decorated
 
 @get('/prijava') 
@@ -60,12 +60,14 @@ def prijava_post():
     if geslo != hashBaza:
          redirect(url('prijava_get'))
          return
+    response.set_cookie("uporabnisko_ime", uporabnisko_ime,  path = "/") #secret = "secret_value",, httponly = True)
+    #response.set_cookie("rola", "receptor",  path = "/")
     redirect(url('profile_get', id_studenta=id_studenta))
 
 @get('/odjava')
 def odjava():
-    response.delete_cookie("Username")
-    response.delete_cookie("Password")
+    response.delete_cookie("username")
+    response.delete_cookie("password")
     return template('osnovna_stran.html', napaka=None)
 
 @get('/registracija')
@@ -81,11 +83,15 @@ def registracija_post():
     house_id = request.forms.house_id
     student1=Student(name=name, house_id=house_id, patronus=patronus, username=username, password=password)
     Repo.dodaj_student(student1)
-    return 'Uspešna registracija'
+    redirect(url('osnovna_stran'))
 
 @get('/profile')
+@cookie_required
 def profile_get():
-    return template("profile.html") 
+    cur.execute("""
+        SELECT "Name", "Username", "Password", "Patronus", "House_id" FROM student
+    """)
+    return template("profile.html") #Preko tega do spremeljivk
 
 @post('/profile')
 def profile_post():
