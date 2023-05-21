@@ -24,39 +24,5 @@ body {
   margin-right: auto;
   }
 
-  .card1 {
-    width: 300px;
-    height: 400px;
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: #f5f5f5;
-    position: relative;
-    overflow: hidden;
-  }
+
   
-  .card1 img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  .card1 .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  
-  .card1 .overlay p {
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0;
-    padding: 20px;
-  }
