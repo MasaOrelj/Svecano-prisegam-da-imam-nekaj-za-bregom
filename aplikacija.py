@@ -48,13 +48,11 @@ def prijava_post():
         redirect(url('prijava_get'))
     hashBaza = None
     try: 
-        hashBaza = cur.execute("SELECT Password FROM student WHERE Username = %s", [uporabnisko_ime])
+        hashBaza = cur.execute('SELECT "Password" FROM student WHERE "Username" = %s', [uporabnisko_ime])
         hashBaza = cur.fetchone()[0]
-        id_studenta = cur.execute("SELECT id FROM student WHERE Username = %s", [uporabnisko_ime])
+        id_studenta = cur.execute('SELECT "id" FROM student WHERE "Username" = %s', [uporabnisko_ime])
         id_studenta = cur.fetchall()[0]
-        print('a')
     except:
-        print("ne odcita hashBaze")
         hashBaza = None
     if hashBaza is None:
         redirect(url('prijava_get'))
@@ -66,9 +64,9 @@ def prijava_post():
 
 @get('/odjava')
 def odjava():
-    response.delete_cookie("uporabnik")
-    response.delete_cookie("rola")
-    return template('osnova_stran.html', napaka=None)
+    response.delete_cookie("Username")
+    response.delete_cookie("Password")
+    return template('osnovna_stran.html', napaka=None)
 
 @get('/registracija')
 def registracija_get():
