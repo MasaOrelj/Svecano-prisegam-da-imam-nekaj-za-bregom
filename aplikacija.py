@@ -17,6 +17,9 @@ SERVER_PORT = os.environ.get('BOTTLE_PORT', 8081)
 RELOADER = os.environ.get('BOTTLE_RELOADER', True)
 DB_PORT = os.environ.get('POSTGRES_PORT', 5432)
 
+conn = psycopg2.connect(database=auth_public.db, host=auth_public.host, user=auth_public.user, password=auth_public.password, port=DB_PORT)
+cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor) 
+
 @get('/')
 def osnovna_stran():
     return template('osnovna_stran.html')
@@ -30,6 +33,7 @@ def cookie_required(f):
         cookie = request.get_cookie("username")
         if cookie:
             return f(*args, **kwargs)
+        return template('subjects.html')
     return decorated
 
 @get('/prijava') 
@@ -44,11 +48,13 @@ def prijava_post():
         redirect(url('prijava_get'))
     hashBaza = None
     try: 
-        cur.execute("SELECT geslo FROM student WHERE username = %s", [uporabnisko_ime])
-        hashBaza = cur.fetchall()[0][0]
-        cur.execute("SELECT id FROM student WHERE username = %s", [uporabnisko_ime])
-        id_studenta = cur.fetchall()[0][0]
+        hashBaza = cur.execute("SELECT Password FROM student WHERE Username = %s", [uporabnisko_ime])
+        hashBaza = cur.fetchone()[0]
+        id_studenta = cur.execute("SELECT id FROM student WHERE Username = %s", [uporabnisko_ime])
+        id_studenta = cur.fetchall()[0]
+        print('a')
     except:
+        print("ne odcita hashBaze")
         hashBaza = None
     if hashBaza is None:
         redirect(url('prijava_get'))
@@ -56,7 +62,7 @@ def prijava_post():
     if geslo != hashBaza:
          redirect(url('prijava_get'))
          return
-    redirect(url('zacetna_stran', id_studenta=id_studenta))
+    redirect(url('profile_get', id_studenta=id_studenta))
 
 @get('/odjava')
 def odjava():
@@ -111,9 +117,6 @@ def forum_get():
 def forum_post():
     redirect('/')
 
-
-conn = psycopg2.connect(database=auth_public.db, host=auth_public.host, user=auth_public.user, password=auth_public.password, port=DB_PORT)
-cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor) 
 
 debug(True)
 
