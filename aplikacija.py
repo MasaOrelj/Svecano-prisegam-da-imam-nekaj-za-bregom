@@ -86,11 +86,11 @@ def registracija_post():
     redirect(url('osnovna_stran'))
 
 @get('/profile')
-@cookie_required
+#@cookie_required
 def profile_get():
-    cur.execute("""
-        SELECT "Name", "Username", "Password", "Patronus", "House_id" FROM student
-    """)
+    #cur.execute("""
+    #    SELECT "Name", "Username", "Password", "Patronus", "House_id" FROM student
+    #""")
     return template("profile.html") #Preko tega do spremeljivk
 
 @post('/profile')
@@ -120,16 +120,6 @@ def forum_get():
 @post('/forum')
 def forum_post():
     redirect('/')
-
-
-@get('/professors')
-def forum_get():
-    return template("professors.html") 
-
-@post('/professors')
-def forum_post():
-    redirect('/')
-
 
 
 debug(True)
