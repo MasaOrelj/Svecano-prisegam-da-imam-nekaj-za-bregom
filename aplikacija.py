@@ -121,6 +121,14 @@ def forum_get():
 def forum_post():
     redirect('/')
 
+@get('/professors')
+def forum_get():
+    return template("professors.html") 
+
+@post('/professors')
+def forum_post():
+    redirect('/')
+
 
 debug(True)
 
