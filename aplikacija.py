@@ -129,6 +129,11 @@ def forum_get():
 def forum_post():
     redirect('/')
 
+static_dir = "./images"
+
+@route("/images/<filename:path>") 
+def static(filename):
+    return static_file(filename, root=static_dir)
 
 debug(True)
 
