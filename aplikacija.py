@@ -119,6 +119,9 @@ def forum_get():
 
 @post('/forum')
 def forum_post():
+    text = request.forms.text
+    student1=Student(text=text)
+    Repo.dodaj_student(student1)
     redirect('/')
 
 @get('/professors')
