@@ -46,3 +46,10 @@ class Repo:
              VALUES (%s, %s, %s, %s, %s); """, (Student.name, Student.username, Student.password, Student.patronus, Student.house_id))
         self.conn.commit()
         return Student
+    
+    def dodaj_post(self, Post: Post) -> Post:
+        self.cur.execute("""
+            INSERT INTO post ("text")
+             VALUES (%s); """, (Post.post))
+        self.conn.commit()
+        return Student
