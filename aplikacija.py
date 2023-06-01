@@ -11,7 +11,7 @@ psycopg2.extensions.register_type(psycopg2.extensions.UNICODE) # se znebimo prob
 
 import os
 
-Repo = Repo()
+repo = Repo()
 
 SERVER_PORT = os.environ.get('BOTTLE_PORT', 8081)
 RELOADER = os.environ.get('BOTTLE_RELOADER', True)
@@ -33,7 +33,7 @@ def cookie_required(f):
         cookie = request.get_cookie("username")
         if cookie:
             return f(*args, **kwargs)
-        #return template('profile.html')%Popravi dekorator
+        return template('prijava.html')
     return decorated
 
 @get('/prijava') 
@@ -60,7 +60,7 @@ def prijava_post():
     if geslo != hashBaza:
          redirect(url('prijava_get'))
          return
-    response.set_cookie("uporabnisko_ime", uporabnisko_ime,  path = "/") #secret = "secret_value",, httponly = True)
+    response.set_cookie("username", uporabnisko_ime,  path = "/") #secret = "secret_value",, httponly = True)
     #response.set_cookie("rola", "receptor",  path = "/")
     redirect(url('profile_get', id_studenta=id_studenta))
 
@@ -82,16 +82,17 @@ def registracija_post():
     patronus = request.forms.patronus
     house_id = request.forms.house_id
     student1=Student(name=name, house_id=house_id, patronus=patronus, username=username, password=password)
-    Repo.dodaj_student(student1)
+    repo.dodaj_student(student1)
     redirect(url('osnovna_stran'))
 
 @get('/profile')
-#@cookie_required
+@cookie_required
 def profile_get():
     #cur.execute("""
     #    SELECT "Name", "Username", "Password", "Patronus", "House_id" FROM student
     #""")
-    return template("profile.html") #Preko tega do spremeljivk
+    uporabnik = request.get_cookie("username")
+    return template("profile.html", uporabnik=uporabnik) #Preko tega do spremeljivk
 
 @post('/profile')
 def profile_post():
@@ -121,7 +122,7 @@ def forum_get():
 def forum_post():
     text = request.forms.text
     student1=Student(text=text)
-    Repo.dodaj_student(student1)
+    repo.dodaj_student(student1)
     redirect('/')
 
 @get('/professors')

@@ -22,7 +22,7 @@ def template(*largs, **kwargs):
     """
 
     
-    return bottle.template(*largs, **kwargs, uporabnik=None, rola=None, url=bottle.url)
+    return bottle.template(*largs, **kwargs, url=bottle.url)
 
 def template_user(*largs, **kwargs):
     """
