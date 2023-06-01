@@ -33,7 +33,7 @@
     <div class="container">
         <div class="row text-light p-5">
             <div class="col-md-12 text-center">
-                <h3>Harry Potter</h3>
+                <h3>Forum</h3>
             </div>
         </div>
     </div>
@@ -69,29 +69,10 @@
 
 <form action="{{url('forum_post')}}" method="post" class="row-g3 mx-2">
     <div class="col-4">
-        <label for="name" class="form-label my-3">Name:</label>
-        <input id="name" name="name" type="text" class="form-control" />
+        <label for="text" class="form-label my-3">Napiši objavo:</label>
+        <input id="text" name="name" type="text" class="form-control" />
     </div>
-    <div class="col-4">
-        <label for="username" class="form-label my-3">Username:</label>
-        <input id="username" name="username" type="text" class="form-control" />
-    </div>
-    <div class="col-4">
-        <label for="password" class="form-label my-3">Password:</label>
-        <input id="password" name="password" type="password" class="form-control" />
-    </div>
-    <div class="col-4">
-        <label for="patronus" class="form-label my-3">Patronus:</label>
-        <input id="patronus" name="patronus" type="text" class="form-control" />
-    </div>
-    <div class="col-4">
-        <label for="house_id" class="form-label my-3">House:</label>
-        <input id="house_id" name="house_id" type="text" class="form-control" />
-    </div>
-    <div class="col-12 my-3 d-flex justify-content-start">
-        <button class="btn btn-outline-dark" type="submit">Next</button>
-    </div>
-    
+
 
 <div class="level-item">
     <a style="border-color: rgb(44, 180, 153); margin-left: 10px;" class="button is-primary" href="/odjava">Odjava</a>
