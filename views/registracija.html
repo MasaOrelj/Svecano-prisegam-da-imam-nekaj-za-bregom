@@ -58,10 +58,57 @@
         <label for="patronus" class="form-label my-3">Patronus:</label>
         <input id="patronus" name="patronus" type="text" class="form-control" />
     </div>
-    <div class="col-4">
-        <label for="house_id" class="form-label my-3">House:</label>
-        <input id="house_id" name="house_id" type="text" class="form-control" />
-    </div>
+        <h1>House Quiz</h1>
+        <form action="/submit" method="POST">
+            <div>
+            <label for="question1">Question 1: Which element do you resonate with the most?</label>
+            <select name="question1" id="question1">
+                <option value="gryffindor">Fire</option>
+                <option value="hufflepuff">Earth</option>
+                <option value="ravenclaw">Air</option>
+                <option value="slytherin">Water</option>
+            </select>
+            </div>
+            <div>
+            <label for="question2">Question 2: Which quality do you value the most?</label>
+            <select name="question2" id="question2">
+                <option value="gryffindor">Bravery</option>
+                <option value="hufflepuff">Loyalty</option>
+                <option value="ravenclaw">Wisdom</option>
+                <option value="slytherin">Ambition</option>
+            </select>
+            </div>
+            <div>
+            <label for="question3">Question 3: Which pet would you choose?</label>
+            <select name="question3" id="question3">
+                <option value="gryffindor">Lion</option>
+                <option value="hufflepuff">Badger</option>
+                <option value="ravenclaw">Eagle</option>
+                <option value="slytherin">Snake</option>
+            </select>
+            </div>
+            <div>
+            <label for="question4">Question 4: Which Hogwarts subject appeals to you the most?</label>
+            <select name="question4" id="question4">
+                <option value="gryffindor">Defense Against the Dark Arts</option>
+                <option value="hufflepuff">Herbology</option>
+                <option value="ravenclaw">Charms</option>
+                <option value="slytherin">Potions</option>
+            </select>
+            </div>
+            <div>
+            <label for="question5">Question 5: Which trait do you possess?</label>
+            <select name="question5" id="question5">
+                <option value="gryffindor">Courage</option>
+                <option value="hufflepuff">Kindness</option>
+                <option value="ravenclaw">Intellect</option>
+                <option value="slytherin">Cunning</option>
+            </select>
+            </div>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+
     <div class="col-12 my-3 d-flex justify-content-start">
         <button class="btn btn-outline-dark" type="submit">Next</button>
     </div>

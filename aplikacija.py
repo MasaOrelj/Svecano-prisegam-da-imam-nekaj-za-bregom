@@ -74,13 +74,48 @@ def odjava():
 def registracija_get():
     return template('registracija.html')
 
+    
+def dodaj_house(question1, question2, question3, question4, question5):
+    house_scores = {
+        'gryffindor': 0,
+        'hufflepuff': 0,
+        'ravenclaw': 0,
+        'slytherin': 0
+    }
+
+    #glede na odgovore (njihove vrednosti) prišteje točke
+    house_scores[question1] += 1
+    house_scores[question2] += 1
+    house_scores[question3] += 1
+    house_scores[question4] += 1
+    house_scores[question5] += 1
+
+    #pogleda, kateri ma najvišji score
+    max_score = max(house_scores.values())
+    houses_with_max_score = [house for house, score in house_scores.items() if score == max_score]
+    house = houses_with_max_score[0]  #če je isto točk izbere prvo
+    if house == 'gryffindor':
+        house = [house,1]
+    elif house == 'hufflepuff':
+        house = [house,2]
+    elif house == 'ravenclaw':
+        house = [house,3]
+    elif house == 'slytherin':
+        house = [house,4]
+
+    return house[1]
 @post('/registracija')
 def registracija_post():
     name = request.forms.name
     username = request.forms.username
     password = request.forms.password
     patronus = request.forms.patronus
-    house_id = request.forms.house_id
+    question1 = request.forms.get('question1')
+    question2 = request.forms.get('question2')
+    question3 = request.forms.get('question3')
+    question4 = request.forms.get('question4')
+    question5 = request.forms.get('question5')
+    house_id = dodaj_house(question1, question2, question3, question4, question5)
     student1=Student(name=name, house_id=house_id, patronus=patronus, username=username, password=password)
     repo.dodaj_student(student1)
     redirect(url('osnovna_stran'))
@@ -132,6 +167,7 @@ def forum_get():
 @post('/professors')
 def forum_post():
     redirect('/')
+
 
 static_dir = "./images"
 

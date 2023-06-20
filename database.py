@@ -53,3 +53,4 @@ class Repo:
              VALUES (%s); """, (Post.post))
         self.conn.commit()
         return Student
+    
