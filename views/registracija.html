@@ -11,6 +11,13 @@
     <style>
       h2{text-align: center;}
     </style>
+
+<style>
+    .answer-line label {
+        margin-left: 20px;
+    }
+</style>
+
 </head>
 <body>
 
@@ -61,13 +68,136 @@
         <h1>Sorting hat</h1>
         <form action="/submit" method="POST">
             <div>
-            <label for="question1">Question 1: Which element do you resonate with the most?</label>
+                <p>Question 1: Which element do you resonate with the most?</p>
+                
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question1" value="gryffindor">
+                    Fire
+                </label></div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question1" value="hufflepuff">
+                    Earth
+                </label></div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question1" value="ravenclaw">
+                    Air
+                </label></div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question1" value="slytherin">
+                    Water
+                </label></div>
+            </div>
+            <div>
+                <p>Question 2: Which quality do you value the most?</p>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question2" value="gryffindor">
+                    Bravery
+                </label></div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question2" value="hufflepuff">
+                    Loyalty
+                </label></div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question2" value="ravenclaw">
+                    Wisdom
+                </label></div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question2" value="slytherin">
+                    Ambition
+                </label></div>
+            </div>
+            <div>
+                <p>Question 3: Which pet would you choose?</p>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question3" value="lion">
+                    Lion
+                </label></div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question3" value="badger">
+                    Badger
+                </label></div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question3" value="eagle">
+                    Eagle
+                </label></div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question3" value="snake">
+                    Snake
+                </label></div>
+            </div>
+            
+            <div>
+                <p>Question 4: Which Hogwarts subject appeals to you the most?</p>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question4" value="defense-against-the-dark-arts">
+                    Defense Against the Dark Arts
+                </label></div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question4" value="herbology">
+                    Herbology
+                </label></div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question4" value="charms">
+                    Charms
+                </label></div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question4" value="potions">
+                    Potions
+                </label></div>
+            </div>
+            
+            <div>
+                <p>Question 5: Which trait do you possess?</p>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question5" value="courage">
+                    Courage
+                </label>
+                </div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question5" value="kindness">
+                    Kindness
+                </label>
+                </div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question5" value="intellect">
+                    Intellect
+                </label>
+                </div>
+                <div class="answer-line">
+                <label>
+                    <input type="radio" name="question5" value="cunning">
+                    Cunning
+                </label>
+                </div>
+            </div>
+            <!--
+            <div>
+                <label for="question2">Question !: Which element do you resonate with the most?</label>
             <select name="question1" id="question1">
                 <option value="gryffindor">Fire</option>
                 <option value="hufflepuff">Earth</option>
                 <option value="ravenclaw">Air</option>
                 <option value="slytherin">Water</option>
-            </select>
+            </select> 
             </div>
             <div>
             <label for="question2">Question 2: Which quality do you value the most?</label>
@@ -104,7 +234,7 @@
                 <option value="ravenclaw">Intellect</option>
                 <option value="slytherin">Cunning</option>
             </select>
-            </div>
+            </div> -->
             <br><br>
             <input type="submit" value="Submit">
         </form>
