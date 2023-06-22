@@ -133,10 +133,6 @@ def profile_get():
     patronus = str(lst[3])
     username = str(lst[4])
     password = str(lst[5])
-
-    #cur.execute("""
-    #    SELECT "Name", "Username", "Password", "Patronus", "House_id" FROM student
-    #""")
     return template("profile.html", id=id, name=name, house=house, patronus=patronus, username=username, password=password) #Preko tega do spremeljivk
 
 @post('/profile')
@@ -147,7 +143,18 @@ def profile_post():
 def post_get():
     cur.execute(""" SELECT * FROM post """)
     posts = cur.fetchall() #dobi vse objave
-    return template('forum.html', posts=posts)
+
+    comments = {}
+    cur.execute("SELECT post_id, text FROM comment")
+    all_comments = cur.fetchall()
+    for comment in all_comments:
+        post_id, text = comment
+        if post_id in comments:
+            comments[post_id].append(text)
+        else:
+            comments[post_id] = [text]
+
+    return template('forum.html', posts=posts, comments=comments)
 
 @post('/forum')
 @cookie_required
@@ -155,16 +162,37 @@ def forum_post():
     uporabnik = request.get_cookie("username")
     cur.execute("""SELECT * FROM Student WHERE "Username" = %s""", [uporabnik])
     lst = cur.fetchall()[0]
-    id = lst[0]
+    id_user = lst[0]
     username = lst[1]
     likes = 1
-    forum_id = 1
     content = request.forms.get('content')
     cur.execute(""" INSERT INTO post ("text", "likes", "student_id") 
-                    VALUES (%s, %s, %s)""", (content, likes, id))
-    redirect('/forum')
+                    VALUES (%s, %s, %s)""", (content, likes, id_user))
+    conn.commit()
+    redirect("/forum")
+    
+@post('/forum')
+@cookie_required
+def comment_post():
+    uporabnik = request.get_cookie("username")
+    cur.execute("""SELECT * FROM Student WHERE "Username" = %s""", [uporabnik])
+    lst = cur.fetchall()[0]
+    id_user = lst[0]
+    username = lst[1]
+    post_id = int(request.forms.get('post_id'))
+    content_comment = request.forms.get('content')
+    cur.execute(""" INSERT INTO comment ("text", "student_id", "post_id") 
+                    VALUES (%s, %s, %s)""", (content_comment, id, post_id))
+    conn.commit()
+    redirect("/forum")
+
+    
 
 
+#<form action="/like" method="POST">
+#<input type="hidden" name="post_id" value="{{ post[0] }}">
+#<button type="submit">Like ({{ like_counts.get(post[0], 0) }})</button>
+#</form>
 @get('/house')
 def houses_get():
     return template("house.html") 
