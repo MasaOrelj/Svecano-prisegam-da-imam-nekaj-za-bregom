@@ -123,16 +123,48 @@ def registracija_post():
 @get('/profile')
 @cookie_required
 def profile_get():
+    uporabnik = request.get_cookie("username")
+    # id_gosta = int(request.cookies.get("id"))
+    cur.execute("""SELECT * FROM Student WHERE "Username" = %s""", [uporabnik])
+    lst = cur.fetchall()[0]
+    id = lst[0]
+    name = str(lst[1])
+    house = int(lst[2])
+    patronus = str(lst[3])
+    username = str(lst[4])
+    password = str(lst[5])
+
     #cur.execute("""
     #    SELECT "Name", "Username", "Password", "Patronus", "House_id" FROM student
     #""")
-    uporabnik = request.get_cookie("username")
-    return template("profile.html", uporabnik=uporabnik) #Preko tega do spremeljivk
+    return template("profile.html", id=id, name=name, house=house, patronus=patronus, username=username, password=password) #Preko tega do spremeljivk
 
 @post('/profile')
 def profile_post():
     redirect('/') 
  
+@get('/forum')
+def post_get():
+    cur.execute(""" SELECT * FROM post """)
+    posts = cur.fetchall() #dobi vse objave
+    return template('forum.html', posts=posts)
+
+@post('/forum')
+@cookie_required
+def forum_post():
+    uporabnik = request.get_cookie("username")
+    cur.execute("""SELECT * FROM Student WHERE "Username" = %s""", [uporabnik])
+    lst = cur.fetchall()[0]
+    id = lst[0]
+    username = lst[1]
+    likes = 1
+    forum_id = 1
+    content = request.forms.get('content')
+    cur.execute(""" INSERT INTO post ("text", "likes", "student_id") 
+                    VALUES (%s, %s, %s)""", (content, likes, id))
+    redirect('/forum')
+
+
 @get('/house')
 def houses_get():
     return template("house.html") 
@@ -149,16 +181,6 @@ def subjects_get():
 def subjects_post():
     redirect('/')   
 
-@get('/forum')
-def forum_get():
-    return template("forum.html") 
-
-@post('/forum')
-def forum_post():
-    text = request.forms.text
-    student1=Student(text=text)
-    repo.dodaj_student(student1)
-    redirect('/')
 
 @get('/professors')
 def forum_get():
