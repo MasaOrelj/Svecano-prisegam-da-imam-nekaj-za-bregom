@@ -5,7 +5,7 @@ from Data.Modeli import *
 from Data.Services import AuthService
 from functools import wraps
 
-import Data.auth as auth_public
+import Data.auth_public as auth_public
 import psycopg2, psycopg2.extensions, psycopg2.extras
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE) # se znebimo problemov s šumniki
 
