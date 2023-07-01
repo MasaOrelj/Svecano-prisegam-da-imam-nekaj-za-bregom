@@ -81,6 +81,7 @@
     <div>
         <hr>
             <h3 style = "position:relative; left:10px; top:2px; ">{{ post[1] }}</h3>
+            <p style="position:relative; left:10px; top:2px;">Posted by: </p>
             <form action="{{url('comment_post', post_id=post[0])}}" method="POST">
                 <textarea style = "position:relative; left:40px; top:2px; border-width:4px; border-style:inset; height: 50px;" name="content" placeholder="Write a comment..." required></textarea>
                 <br>
@@ -91,6 +92,7 @@
         % if post[0] in comments:
             % for comment in comments[post[0]]:
                 <p style = "position:relative; left:40px; top:2px;">{{ comment }}</div>
+                <p style="position:relative; left:40px; top:2px;">Comment by: </p>
             % end
         % end
     </div>

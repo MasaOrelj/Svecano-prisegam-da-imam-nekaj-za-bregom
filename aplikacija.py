@@ -154,7 +154,6 @@ def profile_post():
 def post_get():
     cur.execute(""" SELECT * FROM post """)
     posts = cur.fetchall() #dobi vse objave
-
     comments = {}
     cur.execute("SELECT post_id, text FROM comment")
     all_comments = cur.fetchall()
@@ -164,7 +163,6 @@ def post_get():
             comments[post_id].append(text)
         else:
             comments[post_id] = [text]
-
     return template('forum.html', posts=posts, comments=comments)
 
 @post('/forum')
@@ -174,6 +172,7 @@ def forum_post():
     cur.execute("""SELECT * FROM Student WHERE "Username" = %s""", [uporabnik])
     lst = cur.fetchall()[0]
     id_user = lst[0]
+    username = str(lst[4])
     likes = 1
     content = request.forms.get('content')
     cur.execute(""" INSERT INTO post ("text", "likes", "student_id") 
@@ -188,6 +187,7 @@ def comment_post(post_id: str):
     cur.execute("""SELECT * FROM Student WHERE "Username" = %s""", [uporabnik])
     lst = cur.fetchall()[0]
     id_user = lst[0]
+    username = str(lst[4])
     content_comment = request.forms.get('content')
     cur.execute(""" INSERT INTO comment ("text", "student_id", "post_id") 
                     VALUES (%s, %s, %s)""", (content_comment, id_user, int(post_id)))
