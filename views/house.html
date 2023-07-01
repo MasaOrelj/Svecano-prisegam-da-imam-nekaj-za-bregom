@@ -33,7 +33,7 @@
     <div class="container">
         <div class="row text-light p-5">
             <div class="col-md-12 text-center">
-                <h3>Harry Potter</h3>
+                <h3>Houses</h3>
             </div>
         </div>
     </div>
@@ -45,25 +45,25 @@
          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarText">
              <span class="navbar-toggler-icon"></span>
          </button>
-<div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="/profile">Profile</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/house">House</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/forum" >Forum</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/professors" >Professors</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/subjects">Subjects</a>
-        </li>
-    </ul>
-</div>
+         <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('profile_get')}}">Profile</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url('houses_get')}}">House</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('post_get')}}" >Forum</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('professors_get')}}" >Professors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('subjects_get')}}">Subjects</a>
+                </li>
+            </ul>
+        </div>
 </div>
 </nav>
 <div class="box">

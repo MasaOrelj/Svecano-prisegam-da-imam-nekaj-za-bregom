@@ -104,6 +104,7 @@ def dodaj_house(question1, question2, question3, question4, question5):
         house = [house,4]
 
     return house[1]
+
 @post('/registracija')
 def registracija_post():
     name = request.forms.name
@@ -137,7 +138,7 @@ def profile_get():
 
 @post('/profile')
 def profile_post():
-    redirect('/') 
+    redirect(url('osnovna_stran'))
  
 @get('/forum')
 def post_get():
@@ -163,43 +164,33 @@ def forum_post():
     cur.execute("""SELECT * FROM Student WHERE "Username" = %s""", [uporabnik])
     lst = cur.fetchall()[0]
     id_user = lst[0]
-    username = lst[1]
     likes = 1
     content = request.forms.get('content')
     cur.execute(""" INSERT INTO post ("text", "likes", "student_id") 
                     VALUES (%s, %s, %s)""", (content, likes, id_user))
     conn.commit()
-    redirect("/forum")
+    redirect(url('post_get'))
     
-@post('/forum')
+@post('/comment/<post_id:int>')
 @cookie_required
-def comment_post():
+def comment_post(post_id: str):
     uporabnik = request.get_cookie("username")
     cur.execute("""SELECT * FROM Student WHERE "Username" = %s""", [uporabnik])
     lst = cur.fetchall()[0]
     id_user = lst[0]
-    username = lst[1]
-    post_id = int(request.forms.get('post_id'))
     content_comment = request.forms.get('content')
     cur.execute(""" INSERT INTO comment ("text", "student_id", "post_id") 
-                    VALUES (%s, %s, %s)""", (content_comment, id, post_id))
+                    VALUES (%s, %s, %s)""", (content_comment, id_user, int(post_id)))
     conn.commit()
-    redirect("/forum")
+    redirect(url('post_get'))
 
-    
-
-
-#<form action="/like" method="POST">
-#<input type="hidden" name="post_id" value="{{ post[0] }}">
-#<button type="submit">Like ({{ like_counts.get(post[0], 0) }})</button>
-#</form>
 @get('/house')
 def houses_get():
     return template("house.html") 
 
 @post('/house')
 def houses_post():
-    redirect('/')   
+    redirect(url('osnovna_stran'))  
 
 @get('/subjects')
 def subjects_get():
@@ -207,17 +198,16 @@ def subjects_get():
 
 @post('/subjects')
 def subjects_post():
-    redirect('/')   
+    redirect(url('osnovna_stran'))  
 
 
 @get('/professors')
-def forum_get():
+def professors_get():
     return template("professors.html") 
 
 @post('/professors')
-def forum_post():
-    redirect('/')
-
+def professors_post():
+    redirect(url('osnovna_stran'))
 
 static_dir = "./images"
 
