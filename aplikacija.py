@@ -10,6 +10,8 @@ import psycopg2, psycopg2.extensions, psycopg2.extras
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE) # se znebimo problemov s šumniki
 
 import os
+import csv
+import random
 
 repo = Repo()
 
@@ -105,12 +107,20 @@ def dodaj_house(question1, question2, question3, question4, question5):
 
     return house[1]
 
+
+#random izbira živali za patronus
+animals = []
+with open('Animals.csv', 'r') as file:
+    reader = csv.reader(file)
+    for row in reader:
+        animals.append(row[0])
+
 @post('/registracija')
 def registracija_post():
     name = request.forms.name
     username = request.forms.username
     password = request.forms.password
-    patronus = request.forms.patronus
+    patronus = random.choice(animals)
     question1 = request.forms.get('question1')
     question2 = request.forms.get('question2')
     question3 = request.forms.get('question3')
