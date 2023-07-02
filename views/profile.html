@@ -93,7 +93,17 @@
     </p>
     <hr>
     <p>
-        House: {{house}}
+        House: 
+        %if house == 1:
+            Gryffindor
+        %elif house == 2:
+            Hufflepuff
+        %elif house == 3:
+            Ravenclaw
+        %elif house == 4:
+            Slytherin
+        %end
+
     </p>
     <hr>
     <p>
