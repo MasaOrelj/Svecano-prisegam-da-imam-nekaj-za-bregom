@@ -91,8 +91,11 @@
         </div>
         % for comment in skupaj2:
             % if posts[i][0] == comment[0]:
-                <p style = "position:relative; left:40px; top:2px;">{{ comment[2] }}</div>
-                <p style="position:relative; left:40px; top:2px;">Comment by: {{comment[1]}}</p>
+            <label style = "position:relative; left:10px;" for="freeform">{{comment[1]}}:</label>
+            <textarea style = "position:relative; left:10px; top:2px;" id="freeform" name="freeform" rows="1" cols="50">
+            {{ comment[2] }}
+            </textarea>
+            <br>
             % end
         % end
     </div>
