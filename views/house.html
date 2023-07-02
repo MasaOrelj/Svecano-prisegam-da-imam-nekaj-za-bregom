@@ -33,7 +33,7 @@
     <div class="container">
         <div class="row text-light p-5">
             <div class="col-md-12 text-center">
-                <h3>Houses</h3>
+                <h3>House</h3>
             </div>
         </div>
     </div>
@@ -63,26 +63,34 @@
                     <a class="nav-link" href="{{url('subjects_get')}}">Subjects</a>
                 </li>
             </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a style="border-color: rgb(44, 180, 153); margin-left: 10px;" class="button is-primary" href="/odjava">Odjava</a>
+                </li>
+            </ul>
         </div>
 </div>
 </nav>
+
+% if house==1:
 <div class="box">
+    <td>
+        <img src="https://www.pngitem.com/pimgs/m/134-1342820_harry-potter-hogwarts-clipart-at-free-for-personal.png" width=300 height = 400 alt="My Image" id = "hp" />
+    </td>
 
 <style>
         h1 {text-align: center;}
         p {text-align: center;}
         div {text-align: center;}
 </style>
+
     <br>
-    <p>
-        House: {{house}}
-    </p>
-       <li>"iz uporabnika link" </li> 
-    <hr>
-    <p>
-       Opis hiše
-    </p>
-        <li>"Opis"</li>
+    
+        <p>Within Gryffindor's halls, courage takes flight, <br>
+            Loyal and brave, hearts shining with might. <br>
+            A noble house, where heroes are made, <br>
+            Gryffindor's spirit, undying and unswayed. <br>
+        </p>
     <hr>
     <p>
         Člani
@@ -95,10 +103,104 @@
         <li>"link do lestvice"</li>
     <hr>
 </div>
+% elif house == 2:
+<div class="box">
+    <td>
+        <img src="https://www.monogramdirect.com/wp-content/uploads/2022/07/48582.jpg" width=300 height = 300 alt="My Image" id = "hp" />
+    </td>
 
-<div class="level-item">
-    <a style="border-color: rgb(44, 180, 153); margin-left: 10px;" class="button is-primary" href="/odjava">Odjava</a>
+<style>
+        h1 {text-align: center;}
+        p {text-align: center;}
+        div {text-align: center;}
+</style>
+
+    <br>
+    
+    
+        <p>Within Hufflepuff's abode, kindness blooms, <br>
+            Loyal and true, dispelling all gloom. <br>
+            A house of compassion, where friendships thrive, <br>
+            Hufflepuff's spirit, forever alive. <br>
+        </p>
+    <hr>
+    <p>
+        Člani
+     </p>
+        <li>"Nek link"</li>
+    <hr>
+    <p>
+        Leaderboard
+    </p>
+        <li>"link do lestvice"</li>
+    <hr>
 </div>
+%elif house == 3:
+<div class="box">
+    <td>
+        <img src="https://m.media-amazon.com/images/I/61iys32RuAL.jpg" width=300 height = 300 alt="My Image" id = "hp" />
+    </td>
+
+<style>
+        h1 {text-align: center;}
+        p {text-align: center;}
+        div {text-align: center;}
+</style>
+
+    <br>
+    
+        <p>In Ravenclaw's realm, wisdom takes flight,<br>
+            Minds keen and sharp, seeking truth's light.<br>
+            A house of intellect, where knowledge gleams,<br>
+            Ravenclaw's spirit, forever in dreams.<br>
+        </p>
+    <hr>
+    <p>
+        Člani
+     </p>
+        <li>"Nek link"</li>
+    <hr>
+    <p>
+        Leaderboard
+    </p>
+        <li>"link do lestvice"</li>
+    <hr>
+</div>
+%elif house==4:
+<div class="box">
+    <td>
+        <img src="https://1000logos.net/wp-content/uploads/2023/05/Slytherin-Logo.png" width=300 height = 300 alt="My Image" id = "hp" />
+    </td>
+
+<style>
+        h1 {text-align: center;}
+        p {text-align: center;}
+        div {text-align: center;}
+</style>
+
+<br>
+    
+        <p>In Slytherin's domain, ambition burns bright,<br>
+            Cunning and resourceful, reaching great heights.<br>
+            A house of ambition, where dreams take shape,<br>
+            Slytherin's spirit, forever escapes.<br>
+        </p>
+    <hr>
+    <p>
+        Člani
+     </p>
+        <li>"Nek link"</li>
+    <hr>
+    <p>
+        Leaderboard
+    </p>
+        <li>"link do lestvice"</li>
+    <hr>
+
+</div>
+
+%end
+
 
 
 <footer class="bg-dark p-3">
