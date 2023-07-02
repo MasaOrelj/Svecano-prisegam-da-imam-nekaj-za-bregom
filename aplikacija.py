@@ -204,10 +204,16 @@ def comment_post(post_id: str):
                     VALUES (%s, %s, %s)""", (content_comment, id_user, int(post_id)))
     conn.commit()
     redirect(url('post_get'))
-
+    
 @get('/house')
 def houses_get():
-    return template("house.html") 
+    uporabnik = request.get_cookie("username")
+    # id_gosta = int(request.cookies.get("id"))
+    cur.execute("""SELECT * FROM Student WHERE "Username" = %s""", [uporabnik])
+    lst = cur.fetchall()[0]
+    house = int(lst[2])
+    return template("house.html",  house=house) #Preko tega do spremeljivk
+
 
 @post('/house')
 def houses_post():
