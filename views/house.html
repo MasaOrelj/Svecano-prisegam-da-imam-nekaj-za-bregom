@@ -95,7 +95,9 @@
     <p>
         Člani
      </p>
-        <li>"Nek link"</li>
+    %for clan in vsi:
+        <li>{{clan[0]}}</li>
+    %end
     <hr>
     <p>
         Leaderboard
@@ -127,7 +129,9 @@
     <p>
         Člani
      </p>
-        <li>"Nek link"</li>
+        %for clan in vsi:
+            <li>{{clan[0]}}</li>
+        %end
     <hr>
     <p>
         Leaderboard
@@ -158,7 +162,9 @@
     <p>
         Člani
      </p>
-        <li>"Nek link"</li>
+        %for clan in vsi:
+            <li>{{clan[0]}}</li>
+        %end
     <hr>
     <p>
         Leaderboard
@@ -188,8 +194,10 @@
     <hr>
     <p>
         Člani
-     </p>
-        <li>"Nek link"</li>
+    </p>
+        %for clan in vsi:
+            <li>{{clan[0]}}</li>
+        %end
     <hr>
     <p>
         Leaderboard

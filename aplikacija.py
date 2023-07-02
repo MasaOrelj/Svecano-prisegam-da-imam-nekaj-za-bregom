@@ -226,7 +226,9 @@ def houses_get():
     cur.execute("""SELECT * FROM Student WHERE "Username" = %s""", [uporabnik])
     lst = cur.fetchall()[0]
     house = int(lst[2])
-    return template("house.html",  house=house) #Preko tega do spremeljivk
+    cur.execute("""SELECT "Name" FROM Student WHERE "House_id" = %s""", [house])
+    lst2=cur.fetchall()
+    return template("house.html",  house=house, vsi=lst2) #Preko tega do spremeljivk
 
 
 @post('/house')
