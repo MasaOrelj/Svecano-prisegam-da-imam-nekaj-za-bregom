@@ -154,6 +154,16 @@ def profile_post():
 def post_get():
     cur.execute(""" SELECT * FROM post """)
     posts = cur.fetchall() #dobi vse objave
+    samo_objave = []
+    for post in posts:
+        samo_objave.append(post["text"])
+    uporabniska = []
+    for p in posts:
+        id_objavitelja = int(p[3])
+        cur.execute(""" SELECT * FROM Student WHERE "id" = %s """, [id_objavitelja] )
+        lst = cur.fetchall()[0]
+        user_objavitelja = str(lst[4])
+        uporabniska.append(user_objavitelja)
     comments = {}
     cur.execute("SELECT post_id, text FROM comment")
     all_comments = cur.fetchall()
@@ -163,7 +173,8 @@ def post_get():
             comments[post_id].append(text)
         else:
             comments[post_id] = [text]
-    return template('forum.html', posts=posts, comments=comments)
+    skupaj = tuple(zip(samo_objave,uporabniska))
+    return template('forum.html', posts=posts, objave=samo_objave, comments=comments, uporabniska=uporabniska, skupaj=skupaj)
 
 @post('/forum')
 @cookie_required

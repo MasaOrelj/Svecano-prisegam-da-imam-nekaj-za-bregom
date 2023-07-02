@@ -77,20 +77,20 @@
     </form>
 
     <!-- Posts -->
-    % for post in posts:
+    % for i in range(len(posts)-1):
     <div>
         <hr>
-            <h3 style = "position:relative; left:10px; top:2px; ">{{ post[1] }}</h3>
-            <p style="position:relative; left:10px; top:2px;">Posted by: </p>
-            <form action="{{url('comment_post', post_id=post[0])}}" method="POST">
+            <h3 style = "position:relative; left:10px; top:2px; ">{{ posts[i][1] }}</h3>
+            <p style="position:relative; left:10px; top:2px;">Posted by: {{ list(skupaj)[i][1] }}</p>
+            <form action="{{url('comment_post', post_id=posts[i][0])}}" method="POST">
                 <textarea style = "position:relative; left:40px; top:2px; border-width:4px; border-style:inset; height: 50px;" name="content" placeholder="Write a comment..." required></textarea>
                 <br>
                 <input style = "position:relative; left:40px; top:2px;" type="submit" value="Comment">
             </form>
             <br>
         </div>
-        % if post[0] in comments:
-            % for comment in comments[post[0]]:
+        % if posts[i][0] in comments:
+            % for comment in comments[posts[i][0]]:
                 <p style = "position:relative; left:40px; top:2px;">{{ comment }}</div>
                 <p style="position:relative; left:40px; top:2px;">Comment by: </p>
             % end
