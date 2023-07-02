@@ -89,13 +89,14 @@
             </form>
             <br>
         </div>
-        % if posts[i][0] in comments:
-            % for comment in comments[posts[i][0]]:
-                <p style = "position:relative; left:40px; top:2px;">{{ comment }}</div>
-                <p style="position:relative; left:40px; top:2px;">Comment by: </p>
+        % for comment in skupaj2:
+            % if posts[i][0] == comment[0]:
+                <p style = "position:relative; left:40px; top:2px;">{{ comment[2] }}</div>
+                <p style="position:relative; left:40px; top:2px;">Comment by: {{comment[1]}}</p>
             % end
         % end
     </div>
     % end
+    <br>
 </body>
 </html>

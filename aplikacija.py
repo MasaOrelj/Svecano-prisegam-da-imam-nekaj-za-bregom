@@ -164,17 +164,31 @@ def post_get():
         lst = cur.fetchall()[0]
         user_objavitelja = str(lst[4])
         uporabniska.append(user_objavitelja)
+    skupaj = tuple(zip(samo_objave,uporabniska))
     comments = {}
-    cur.execute("SELECT post_id, text FROM comment")
+    cur.execute("SELECT post_id, text, student_id FROM comment")
     all_comments = cur.fetchall()
     for comment in all_comments:
-        post_id, text = comment
+        post_id, text, student_id = comment
         if post_id in comments:
-            comments[post_id].append(text)
+            comments[post_id].append((text, student_id))
         else:
-            comments[post_id] = [text]
-    skupaj = tuple(zip(samo_objave,uporabniska))
-    return template('forum.html', posts=posts, objave=samo_objave, comments=comments, uporabniska=uporabniska, skupaj=skupaj)
+            comments[post_id] = [(text, student_id)]
+    samo_komentar_id = []
+    for comment in comments:
+        for com in comments[comment]:
+            samo_komentar_id.append((com[1],comment, com[0]))
+    uporabniska2 = []
+    for comment in samo_komentar_id:
+        student_id = int(comment[0])
+        cur.execute(""" SELECT * FROM Student WHERE "id" = %s """, [student_id] )
+        lst2 = cur.fetchall()[0]
+        user_objavitelja2 = str(lst2[4])
+        uporabniska2.append(user_objavitelja2)
+    skupaj2 = []
+    for i in range(len(uporabniska2)):
+        skupaj2.append((samo_komentar_id[i][1], uporabniska2[i], samo_komentar_id[i][2]))
+    return template('forum.html', posts=posts, objave=samo_objave, comments=comments, uporabniska=uporabniska, skupaj=skupaj, samo_komentarji=samo_komentar_id, skupaj2 = skupaj2)
 
 @post('/forum')
 @cookie_required
