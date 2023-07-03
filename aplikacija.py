@@ -148,17 +148,21 @@ def profile_get():
     lst2 = cur.fetchall()
     predmeti_id = [row[2] for row in lst2]
     predmeti_vse = []
-    for i in range(0,5):
-        cur.execute("""SELECT * FROM Subject WHERE "id" = %s""", [predmeti_id[i]])
-        predmeti_vse.append(cur.fetchall()[0])
-    imena = [row[1] for row in predmeti_vse]
-    prof_id = [row[2] for row in predmeti_vse]
-    predmeti_prof = []
-    for i in range(0,5):
-        cur.execute("""SELECT * FROM professor WHERE "id" = %s""", [prof_id[i]])
-        predmeti_prof.append(cur.fetchall()[0])
-    prof_imena = [row[1] for row in predmeti_prof]
-    skupaj = tuple(zip(imena,prof_imena))
+    if predmeti_id == []:
+        skupaj = []
+        prof_imena = []
+    else:
+        for i in range(0,5):
+            cur.execute("""SELECT * FROM Subject WHERE "id" = %s""", [predmeti_id[i]])
+            predmeti_vse.append(cur.fetchall()[0])
+        imena = [row[1] for row in predmeti_vse]
+        prof_id = [row[2] for row in predmeti_vse]
+        predmeti_prof = []
+        for i in range(0,5):
+            cur.execute("""SELECT * FROM professor WHERE "id" = %s""", [prof_id[i]])
+            predmeti_prof.append(cur.fetchall()[0])
+        prof_imena = [row[1] for row in predmeti_prof]
+        skupaj = tuple(zip(imena,prof_imena))
     return template("profile.html", id=id, name=name, house=house, patronus=patronus, username=username, password=password, predmeti=skupaj, profesorji=prof_imena) #Preko tega do spremeljivk
 
 @post('/profile')
