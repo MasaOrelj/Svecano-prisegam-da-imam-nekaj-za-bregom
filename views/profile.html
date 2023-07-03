@@ -9,7 +9,14 @@
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="osnovna_stran.css">
     <style>
+    body {
+        font-family: Garamond, serif;
+        font-size: 20px
+    }
       h2{text-align: center;}
+      h3 {
+      font-size: 40px
+    }
     </style>
 </head>
 <body>
@@ -33,6 +40,7 @@
     <div class="container">
         <div class="row text-light p-5">
             <div class="col-md-12 text-center">
+                <h3>Profile</h3>
             </div>
         </div>
     </div>
@@ -71,53 +79,78 @@
 </div>
 </nav>
 <div class="box">
-
-          <td>
-            <img src="https://cdn2.vectorstock.com/i/1000x1000/32/31/ancient-wizard-avatar-wise-magician-with-thick-vector-31993231.jpg" width=300 height = 300 alt="My Image" id = "hp" />
-          </td>
-        <p>Morda slika študenta</p>
-
-<style>
-        h1 {text-align: center;}
-        p {text-align: center;}
-        div {text-align: center;}
-</style>
-
-    <br>
-    <p>
-        Username: {{username}}
-    </p>
+    <div class="image-container">
+        <img src="https://i.ebayimg.com/images/g/iG8AAOSwXLpZ3Ne5/s-l1600.jpg" alt="My Image" id="hp" />
+    </div>
+    <h1>Hello, student!</h1>
+    <p class="username">Username: {{username}}</p>
     <hr>
-    <p>
-       Name: {{name}}
-    </p>
+    <p class="name">Name: {{name}}</p>
     <hr>
-    <p>
-        House: 
-        %if house == 1:
+    <p class="house">House: 
+        % if house == 1:
             Gryffindor
-        %elif house == 2:
+        % elif house == 2:
             Hufflepuff
-        %elif house == 3:
+        % elif house == 3:
             Ravenclaw
-        %elif house == 4:
+        % elif house == 4:
             Slytherin
-        %end
-
+        % end
     </p>
     <hr>
-    <p>
-        Patronus: {{patronus}}
-     </p>
+    <p class="patronus">Patronus: {{patronus}}</p>
     <hr>
-    <p>
-        Subjects:
-        %for par in predmeti:
+    <p class="subjects">Subjects:</p>
+    <ul>
+        % for par in predmeti:
             <li>{{par[0]}}, taught by {{par[1]}}</li>
-        %end
-    </p>
+        % end
+    </ul>
     <hr>
 </div>
+
+<style>
+    .box {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: white;
+    }
+
+    .image-container {
+        text-align: center;
+    }
+
+    img {
+        width: 250px;
+        height: 300px;
+    }
+    h1 {
+        font-size: 40px
+    }
+    h1, p {
+        text-align: center;
+    }
+
+    .username, .name, .house, .patronus, .subjects {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        margin-bottom: 5px;
+    }
+</style>
+
 
 
 
