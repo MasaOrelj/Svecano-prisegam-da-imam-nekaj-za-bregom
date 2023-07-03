@@ -167,11 +167,13 @@ def profile_post():
  
 @get('/forum')
 def post_get():
-    cur.execute(""" SELECT * FROM post """)
+    cur.execute(""" SELECT * FROM post ORDER by "id" DESC """)
     posts = cur.fetchall() #dobi vse objave
     samo_objave = []
+    likes = []
     for post in posts:
         samo_objave.append(post["text"])
+        likes.append(post["likes"])
     uporabniska = []
     for p in posts:
         id_objavitelja = int(p[3])
@@ -203,7 +205,7 @@ def post_get():
     skupaj2 = []
     for i in range(len(uporabniska2)):
         skupaj2.append((samo_komentar_id[i][1], uporabniska2[i], samo_komentar_id[i][2]))
-    return template('forum.html', posts=posts, objave=samo_objave, comments=comments, uporabniska=uporabniska, skupaj=skupaj, samo_komentarji=samo_komentar_id, skupaj2 = skupaj2)
+    return template('forum.html', posts=posts, objave=samo_objave, comments=comments, uporabniska=uporabniska, skupaj=skupaj, samo_komentarji=samo_komentar_id, skupaj2 = skupaj2, likes=likes)
 
 @post('/forum')
 @cookie_required
@@ -213,13 +215,23 @@ def forum_post():
     lst = cur.fetchall()[0]
     id_user = lst[0]
     username = str(lst[4])
-    likes = 1
+    likes = 0
     content = request.forms.get('content')
     cur.execute(""" INSERT INTO post ("text", "likes", "student_id") 
                     VALUES (%s, %s, %s)""", (content, likes, id_user))
     conn.commit()
     redirect(url('post_get'))
     
+@post('/likes/<post_id:int>')
+@cookie_required
+def likes_post(post_id: str):
+    cur.execute(""" UPDATE post 
+                    SET likes = likes + 1
+                    WHERE id =  %s""", (post_id,))
+    conn.commit()
+    redirect(url('post_get'))
+    
+
 @post('/comment/<post_id:int>')
 @cookie_required
 def comment_post(post_id: str):
@@ -227,7 +239,6 @@ def comment_post(post_id: str):
     cur.execute("""SELECT * FROM Student WHERE "Username" = %s""", [uporabnik])
     lst = cur.fetchall()[0]
     id_user = lst[0]
-    username = str(lst[4])
     content_comment = request.forms.get('content')
     cur.execute(""" INSERT INTO comment ("text", "student_id", "post_id") 
                     VALUES (%s, %s, %s)""", (content_comment, id_user, int(post_id)))
