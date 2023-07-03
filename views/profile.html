@@ -111,7 +111,10 @@
      </p>
     <hr>
     <p>
-        Subjects: 
+        Subjects:
+        %for par in predmeti:
+            <li>{{par[0]}}, taught by {{par[1]}}</li>
+        %end
     </p>
     <hr>
 </div>

@@ -15,6 +15,7 @@ from Data.Modeli import *    #uvozimo classe tabel
 
 import Data.auth as auth  
 from datetime import date
+import random
 
 
 class Repo:
@@ -44,6 +45,14 @@ class Repo:
         self.cur.execute("""
             INSERT INTO student ("Name", "Username", "Password", "Patronus", "House_id")
              VALUES (%s, %s, %s, %s, %s); """, (Student.name, Student.username, Student.password, Student.patronus, Student.house_id))
+        self.conn.commit()
+        id_predmetov = [1,2,3,4,11,7,8,12,13,14,38,39,43,46,47,49,54,55,58,48,10]
+        randomlist = random.sample(id_predmetov, 5)
+        self.cur.execute("""SELECT * FROM Student WHERE "Username" = %s""", [Student.username])
+        lst = self.cur.fetchall()[0]
+        student_id = lst[0]
+        for i in range (0,5):
+            self.cur.execute(""" INSERT INTO student_subject ("student_id", "subject_id") VALUES (%s,%s);""", (student_id, randomlist[i]))
         self.conn.commit()
         return Student
     
