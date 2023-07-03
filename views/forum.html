@@ -81,12 +81,12 @@
     <div>
         <hr>
             <h3 style = "position:relative; left:10px; top:2px; ">{{ posts[i][1] }}</h3>
+            <form action="{{url('likes_post', post_id=posts[i][0])}}" method="POST">
+                <input style = "position:relative; left:10px; top:2px;" type="submit" value="Like">
+            </form>
+            <br>
             <p style="position:relative; left:10px; top:2px;">Posted by: {{ list(skupaj)[i][1] }}</p>
             <p style="position:relative; left:10px; top:2px;">Likes: {{likes[i]}}</p>
-            <form action="{{url('likes_post', post_id=posts[i][0])}}" method="POST">
-                <br>
-                <input style = "position:relative; left:40px; top:2px;" type="submit" value="Like">
-            </form>
             <form action="{{url('comment_post', post_id=posts[i][0])}}" method="POST">
                 <textarea style = "position:relative; left:40px; top:2px; border-width:4px; border-style:inset; height: 50px;" name="content" placeholder="Write a comment..." required></textarea>
                 <br>
@@ -96,10 +96,9 @@
         </div>
         % for comment in skupaj2:
             % if posts[i][0] == comment[0]:
-            <p style = "position:relative; left:10px;" for="freeform">{{comment[1]}}:
+            <p style = "position:relative; left:10px; top:2px;" for="freeform">{{comment[1]}}:</p>
             <p style = "position:relative; left:10px; top:2px; border-width:4px; border-style:inset; height: 50px;" id="comments" name="comments" rows="1" cols="50">
-            {{ comment[2] }}
-            </textarea>
+            {{ comment[2] }}</p>
             <br>
             % end
         % end

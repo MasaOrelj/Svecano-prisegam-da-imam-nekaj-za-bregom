@@ -245,6 +245,15 @@ def comment_post(post_id: str):
     conn.commit()
     redirect(url('post_get'))
     
+def lestvica():
+    cur.execute("""SELECT * FROM post""")
+    lst = cur.fetchall()[0]
+    for post in lst:
+        id_studenta = lst[3]
+        likes = lst[2]
+        cur.execute("""SELECT House_id FROM Student WHERE "id" = %s""", [id_studenta])
+        hisa = cur.fetchall()[0]
+
 @get('/house')
 def houses_get():
     uporabnik = request.get_cookie("username")
@@ -254,7 +263,42 @@ def houses_get():
     house = int(lst[2])
     cur.execute("""SELECT "Name" FROM Student WHERE "House_id" = %s""", [house])
     lst2=cur.fetchall()
-    return template("house.html",  house=house, vsi=lst2) #Preko tega do spremeljivk
+    cur.execute("""SELECT * FROM post""")
+    lst3 = cur.fetchall()
+    lestvica = {1: 0, 2: 0, 3: 0, 4: 0}
+    proba = []
+    for post in lst3:
+        id_studenta = post[3]
+        likes = int(post[2])
+        cur.execute("""SELECT "House_id" FROM Student WHERE "id" = %s""", [id_studenta])
+        hisa = cur.fetchone()[0]
+        proba.append((hisa))
+        if hisa == 1:
+            lestvica[1] += likes
+        elif hisa == 2:
+            lestvica[2] += likes
+        elif hisa == 3:
+            lestvica[3] += likes
+        else:
+            lestvica[4] += likes
+    lead = []
+    for key, value in lestvica.items():
+        lead.append((key, value))
+    lead.sort(key = lambda x: -x[1])
+    slovar_imen = {1: "Gryffindor", 2: "Hufflepuff", 3: "Ravenclaw", 4: "Slytherin"}
+    return template("house.html",  house=house, vsi=lst2, lestvica=lead, slovar = slovar_imen) #Preko tega do spremeljivk
+    
+@get('/lestvica')
+def lestvica_get():
+    cur.execute("""SELECT * FROM post""")
+    lst = cur.fetchall()[0]
+    hisa = []
+    for post in lst:
+        #id_studenta = post[3]
+        #likes = post[2]
+        #cur.execute("""SELECT House_id FROM Student WHERE "id" = %s""", [id_studenta])
+        hisa.append(post)
+    return template("house.html",  hisa=hisa)
 
 
 @post('/house')

@@ -193,7 +193,7 @@
         </p>
     <hr>
     <p>
-        Člani
+        Members
     </p>
         %for clan in vsi:
             <li>{{clan[0]}}</li>
@@ -202,7 +202,10 @@
     <p>
         Leaderboard
     </p>
-        <li>"link do lestvice"</li>
+        <p>First: {{slovar[lestvica[0][0]]}} with {{lestvica[0][1]}} points</p>
+        <p>Second: {{slovar[lestvica[1][0]]}} with {{lestvica[1][1]}} points</p>
+        <p>Third: {{slovar[lestvica[2][0]]}} with {{lestvica[2][1]}} points</p>
+        <p>Fourth: {{slovar[lestvica[3][0]]}} with {{lestvica[3][1]}} points</p>
     <hr>
 
 </div>
