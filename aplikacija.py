@@ -177,7 +177,9 @@ def profile_post():
     redirect(url('osnovna_stran'))
  
 @get('/forum')
+@cookie_required 
 def post_get():
+    uporabnik = request.get_cookie("username")
     cur.execute(""" SELECT * FROM post ORDER by "id" DESC """)
     posts = cur.fetchall() #dobi vse objave
     samo_objave = []
@@ -266,6 +268,7 @@ def lestvica():
         hisa = cur.fetchall()[0]
 
 @get('/house')
+@cookie_required
 def houses_get():
     uporabnik = request.get_cookie("username")
     # id_gosta = int(request.cookies.get("id"))
@@ -317,6 +320,7 @@ def houses_post():
     redirect(url('osnovna_stran'))  
 
 @get('/subjects')
+@cookie_required
 def subjects_get():
     return template("subjects.html") 
 
@@ -324,10 +328,11 @@ def subjects_get():
 def subjects_post():
     redirect(url('osnovna_stran'))  
 
-
 @get('/professors')
+@cookie_required
 def professors_get():
     return template("professors.html") 
+
 
 @post('/professors')
 def professors_post():
