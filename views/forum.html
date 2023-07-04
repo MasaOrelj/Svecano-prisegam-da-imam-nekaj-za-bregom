@@ -83,24 +83,25 @@
 <h1 style="position:relative; left:10px; top:2px;">Welcome to the Great Hall Forum!</h1>
     <!-- Post Form -->
     <form style = "position:relative; left:10px; top:2px;" action="{{url('forum_post')}}" method="POST">
-        <textarea  style = "border-width:4px; border-style:inset; width: 400px;"name="content"  placeholder="Write your post here..." required></textarea>
+        <textarea  style = "border-width:4px; border-style:inset; width: 700px;"name="content"  placeholder="Write your post here..." required></textarea>
         <br>
         <input type="submit" value="Post">
     </form>
 
     <!-- Posts -->
     % for i in range(len(posts)):
-    <div>
-        <hr style="border-top: 2px solid #ccc; margin: 20px 0;">
-            <h3 style = "position:relative; left:10px; top:2px; background-color: #f5f5f5; padding: 5px;">{{ posts[i][1] }}</h3>
-            <p style="position:relative; left:10px; top:2px; background-color: #f5f5f5; padding: 5px;">Posted by: {{ list(skupaj)[i][1] }}</p>
+    <div style=" position:relative; width: 700px; margin: 20px; padding: 5px;">
+        <hr style="position:relative; border-top: 2px solid #ccc; margin: 20px 0; padding: 5px;">
+        <div style="position:relative; background-color: #f5f5f5; padding: 5px; margin-bottom: 20px;">
+            <h3  style="padding-left: 10px;">{{ posts[i][1] }}</h3>
+            <p  style="padding-left: 10px;">Posted by: {{ list(skupaj)[i][1] }}</p>
             <form action="{{url('likes_post', post_id=posts[i][0])}}" method="POST">
                 <input style = "position:relative; left:10px; top:2px; background-color: red; color: white; border: none; padding: 6px 12px; font-size: 14px; border-radius: 3px; cursor: pointer;" type="submit" value="Like">
             </form>
             <br>
             <p style="position:relative; left:10px; top:2px;">Likes: {{likes[i]}}</p>
             <form action="{{url('comment_post', post_id=posts[i][0])}}" method="POST">
-                <textarea style = "position:relative; left:10px; top:2px; border-width:4px; border-style:inset; height: 50px;" name="content" placeholder="Write a comment..." required></textarea>
+                <textarea style = "position:relative; left:10px; top:2px; border-width:4px; border-style:inset; height: 50px; width:600px;" name="content" placeholder="Write a comment..." required></textarea>
                 <br>
                 <input style = "position:relative; left:10px; top:2px;" type="submit" value="Comment">
             </form>
@@ -109,7 +110,7 @@
         % for comment in skupaj2:
             % if posts[i][0] == comment[0]:
             <p style = "position:relative; left:10px; top:2px;" for="freeform">{{comment[1]}}:</p>
-            <p style = "position:relative; left:10px; top:2px; border-width:4px; border-style:inset; height: 50px; width: 300px;" id="comments" name="comments" rows="1" cols="50">
+            <p style = "position:relative; left:10px; top:2px; border-width:4px; border-style:inset; height: 60px; width: 600px; overflow: auto;" id="comments" name="comments" rows="1" cols="50">
             {{ comment[2] }}</p>
             <br>
             % end
