@@ -22,6 +22,13 @@ DB_PORT = os.environ.get('POSTGRES_PORT', 5432)
 conn = psycopg2.connect(database=auth_public.db, host=auth_public.host, user=auth_public.user, password=auth_public.password, port=DB_PORT)
 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor) 
 
+def password_hash(s):
+    """Vrni SHA-512 hash danega UTF-8 niza. Gesla vedno spravimo v bazo
+       kodirana s to funkcijo."""
+    h = hashlib.sha512()
+    h.update(s.encode('utf-8'))
+    return h.hexdigest()
+
 @get('/')
 def osnovna_stran():
     return template('osnovna_stran.html')
@@ -45,7 +52,7 @@ def prijava_get():
 @post('/prijava') 
 def prijava_post():
     uporabnisko_ime = request.forms.get('uporabnisko_ime')
-    geslo = request.forms.get('geslo')
+    geslo = password_hash(request.forms.get('geslo'))
     if uporabnisko_ime is None or geslo is None:
         redirect(url('prijava_get'))
     hashBaza = None
@@ -119,7 +126,7 @@ with open('Animals.csv', 'r') as file:
 def registracija_post():
     name = request.forms.name
     username = request.forms.username
-    password = request.forms.password
+    password = password_hash(request.forms.password)
     patronus = random.choice(animals)
     question1 = request.forms.get('question1')
     question2 = request.forms.get('question2')
