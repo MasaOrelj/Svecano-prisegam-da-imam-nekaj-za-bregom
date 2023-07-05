@@ -192,7 +192,7 @@ def post_get():
         id_objavitelja = int(p[3])
         cur.execute(""" SELECT * FROM Student WHERE "id" = %s """, [id_objavitelja] )
         lst = cur.fetchall()[0]
-        user_objavitelja = str(lst[4])
+        user_objavitelja = str(lst[1])
         uporabniska.append(user_objavitelja)
     skupaj = tuple(zip(samo_objave,uporabniska))
     comments = {}
@@ -213,7 +213,7 @@ def post_get():
         student_id = int(comment[0])
         cur.execute(""" SELECT * FROM Student WHERE "id" = %s """, [student_id] )
         lst2 = cur.fetchall()[0]
-        user_objavitelja2 = str(lst2[4])
+        user_objavitelja2 = str(lst2[1])
         uporabniska2.append(user_objavitelja2)
     skupaj2 = []
     for i in range(len(uporabniska2)):
