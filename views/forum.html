@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
     <title>I solemnly swear
        that I am up to no good</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,7 +72,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a style="border-color: rgb(44, 180, 153); margin-left: 10px;" class="button is-primary" href="/odjava">Odjava</a>
+            <a style="border-color: rgb(44, 180, 153); margin-left: 10px;" class="button is-primary" href="/odjava">Log out</a>
         </li>
     </ul>
 </div>
@@ -109,7 +109,7 @@
         </div>
         % for comment in skupaj2:
             % if posts[i][0] == comment[0]:
-            <p style = "position:relative; left:10px; top:2px;" for="freeform">{{comment[1]}}:</p>
+            <p style="position:relative; left:10px; top:2px;" for="freeform">{{comment[1]}}:</p>
             <p style = "position:relative; left:10px; top:2px; border-width:4px; border-style:inset; height: 60px; width: 600px; overflow: auto;" id="comments" name="comments" rows="1" cols="50">
             {{ comment[2] }}</p>
             <br>
