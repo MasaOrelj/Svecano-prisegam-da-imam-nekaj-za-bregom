@@ -258,14 +258,6 @@ def comment_post(post_id: str):
     conn.commit()
     redirect(url('post_get'))
     
-def lestvica():
-    cur.execute("""SELECT * FROM post""")
-    lst = cur.fetchall()[0]
-    for post in lst:
-        id_studenta = lst[3]
-        likes = lst[2]
-        cur.execute("""SELECT House_id FROM Student WHERE "id" = %s""", [id_studenta])
-        hisa = cur.fetchall()[0]
 
 @get('/house')
 @cookie_required
@@ -302,18 +294,6 @@ def houses_get():
     slovar_imen = {1: "Gryffindor", 2: "Hufflepuff", 3: "Ravenclaw", 4: "Slytherin"}
     return template("house.html",  house=house, vsi=lst2, lestvica=lead, slovar = slovar_imen) #Preko tega do spremeljivk
     
-@get('/lestvica')
-def lestvica_get():
-    cur.execute("""SELECT * FROM post""")
-    lst = cur.fetchall()[0]
-    hisa = []
-    for post in lst:
-        #id_studenta = post[3]
-        #likes = post[2]
-        #cur.execute("""SELECT House_id FROM Student WHERE "id" = %s""", [id_studenta])
-        hisa.append(post)
-    return template("house.html",  hisa=hisa)
-
 
 @post('/house')
 def houses_post():
