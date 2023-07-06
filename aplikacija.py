@@ -4,6 +4,7 @@ from database import Repo
 from Data.Modeli import *
 from Data.Services import AuthService
 from functools import wraps
+import re
 
 import Data.auth_public as auth_public
 import psycopg2, psycopg2.extensions, psycopg2.extras
@@ -185,7 +186,8 @@ def post_get():
     samo_objave = []
     likes = []
     for post in posts:
-        samo_objave.append(post["text"])
+        besedilo = post["text"]
+        samo_objave.append(besedilo)
         likes.append(post["likes"])
     uporabniska = []
     for p in posts:
@@ -220,6 +222,7 @@ def post_get():
         skupaj2.append((samo_komentar_id[i][1], uporabniska2[i], samo_komentar_id[i][2]))
     return template('forum.html', posts=posts, objave=samo_objave, comments=comments, uporabniska=uporabniska, skupaj=skupaj, samo_komentarji=samo_komentar_id, skupaj2 = skupaj2, likes=likes)
 
+
 @post('/forum')
 @cookie_required
 def forum_post():
@@ -230,8 +233,19 @@ def forum_post():
     username = str(lst[4])
     likes = 0
     content = request.forms.get('content')
+    my_new_string = re.sub('Ä', 'č', content)
+    my_new_string = re.sub('Å½', 'Ž', my_new_string)
+    my_new_string = re.sub('Å¾', 'ž', my_new_string)
+    my_new_string = re.sub('Å¡', 'š', my_new_string)
+    my_new_string = re.sub('Å', 'Š', my_new_string)
+    if my_new_string[0] == "č":
+        my_new_string = "Č"+ my_new_string[1:]
+    for i in range(len(my_new_string)-2):
+        if my_new_string[i] == "Š":
+            my_new_string = my_new_string[:i+1]+my_new_string[i+2:]
+    
     cur.execute(""" INSERT INTO post ("text", "likes", "student_id") 
-                    VALUES (%s, %s, %s)""", (content, likes, id_user))
+                    VALUES (%s, %s, %s)""", (my_new_string, likes, id_user))
     conn.commit()
     redirect(url('post_get'))
     
@@ -253,8 +267,18 @@ def comment_post(post_id: str):
     lst = cur.fetchall()[0]
     id_user = lst[0]
     content_comment = request.forms.get('content')
+    my_new_string = re.sub('Ä', 'č', content_comment)
+    my_new_string = re.sub('Å½', 'Ž', my_new_string)
+    my_new_string = re.sub('Å¾', 'ž', my_new_string)
+    my_new_string = re.sub('Å¡', 'š', my_new_string)
+    my_new_string = re.sub('Å', 'Š', my_new_string)
+    if my_new_string[0] == "č":
+        my_new_string = "Č"+ my_new_string[1:]
+    for i in range(len(my_new_string)-2):
+        if my_new_string[i] == "Š":
+            my_new_string = my_new_string[:i+1]+my_new_string[i+2:]
     cur.execute(""" INSERT INTO comment ("text", "student_id", "post_id") 
-                    VALUES (%s, %s, %s)""", (content_comment, id_user, int(post_id)))
+                    VALUES (%s, %s, %s)""", (my_new_string, id_user, int(post_id)))
     conn.commit()
     redirect(url('post_get'))
     
